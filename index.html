@@ -37,7 +37,8 @@
           <div class="browser-body hero-demo-stage" id="heroDemo">
             <p class="email-line muted">...following up on our conversation from yesterday,</p>
             <p class="email-line hero-sentence" id="heroSentence">
-              <span>I</span> <span>really</span> <span>appreciate</span> <span>you</span> <span>taking</span> <span>the</span> <span>time</span> <span>to</span> <span>meet</span> <span>with</span> <span>me</span> <span>today.</span>
+              <span class="selection-sweep" id="heroSelectionSweep" aria-hidden="true"></span>
+              <span class="sentence-copy">I really appreciate you taking the time to meet with me today.</span>
             </p>
             <p class="note hero-annotation" id="heroSelectNote">this one →</p>
 
@@ -50,17 +51,24 @@
             <div class="hero-playback" id="heroPlayback" aria-hidden="true">
               <small>Your Ditto voice</small>
               <div class="wave blue animated-wave" data-wave="20"></div>
-              <span class="note playback-note">same words. a more you.</span>
+              <span class="playback-value">same you. clearer.</span>
             </div>
+            <p class="note playback-reaction" id="heroReaction">wait… that sounds like me.</p>
 
+            <div class="hero-shadow-status" id="heroShadowStatus" aria-hidden="true">
+              <span class="shadow-label">🎙 Shadowing…</span>
+              <div class="wave shadow-wave animated-wave" data-wave="12"></div>
+            </div>
             <p class="note your-turn-note" id="heroTurnNote">your turn →</p>
-            <p class="note again-note" id="heroAgainNote">again?</p>
+            <p class="note closer-note" id="heroCloserNote">closer.</p>
+            <p class="note save-hint" id="heroSaveHint">keep this one for later</p>
 
-            <div class="demo-cursor" id="heroCursor" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20">
+            <div class="demo-cursor pointer-mode" id="heroCursor" aria-hidden="true">
+              <svg class="cursor-pointer" width="20" height="20" viewBox="0 0 20 20">
                 <path d="M2 1 L2 16 L6 12.3 L9 18 L11.6 16.7 L8.6 11 L14 11 Z" fill="#1F1F1B" stroke="#F7F2E8" stroke-width="1.1"></path>
                 <circle cx="3.4" cy="13.6" r="1.5" fill="#FFD43B"></circle>
               </svg>
+              <span class="cursor-ibeam" aria-hidden="true"><i></i></span>
               <span class="cursor-ripple"></span>
             </div>
           </div>
