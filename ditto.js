@@ -75,13 +75,18 @@
     hero.shadowStatus.style.left = toolbarLeft + 'px';
     hero.shadowStatus.style.top = resultTop + 'px';
 
+    // Never place annotation text using magic numbers. Measure the rendered
+    // status blocks so copy cannot overlap waveforms at mobile breakpoints.
+    const playbackHeight = hero.playback.offsetHeight || 58;
+    const shadowHeight = hero.shadowStatus.offsetHeight || 42;
     hero.reaction.style.left = toolbarLeft + 'px';
-    const reactionOffset = window.innerWidth <= 620 ? 48 : 62;
-    hero.reaction.style.top = (resultTop + reactionOffset) + 'px';
+    hero.reaction.style.top = (resultTop + playbackHeight + 10) + 'px';
+
     hero.turnNote.style.left = clamp(toolbarLeft + 135, 12, stageWidth - 100) + 'px';
-    hero.turnNote.style.top = (toolbarTop + 12) + 'px';
+    hero.turnNote.style.top = (toolbarTop + 10) + 'px';
+
     hero.closerNote.style.left = toolbarLeft + 'px';
-    hero.closerNote.style.top = (resultTop + (window.innerWidth <= 620 ? 44 : 56)) + 'px';
+    hero.closerNote.style.top = (resultTop + shadowHeight + 10) + 'px';
     hero.saveHint.style.left = clamp(toolbarLeft + toolbarWidth - 118, 12, stageWidth - 130) + 'px';
     hero.saveHint.style.top = (toolbarTop + (hero.toolbar.offsetHeight || 48) + (window.innerWidth <= 620 ? 5 : 7)) + 'px';
   };
@@ -177,6 +182,7 @@
       await clickCursor(hero.cursor);
       hero.hear.classList.add('pressed','active');
       hero.playback.classList.add('visible');
+      requestAnimationFrame(placeHeroFloatingUI);
       await sleep(520);
       hero.reaction.classList.add('visible');
       await sleep(900);
@@ -190,6 +196,7 @@
       await clickCursor(hero.cursor);
       hero.shadow.classList.add('pressed','active');
       hero.shadowStatus.classList.add('visible');
+      requestAnimationFrame(placeHeroFloatingUI);
       hero.turnNote.classList.add('visible');
       await sleep(720);
       hero.closerNote.classList.add('visible');
