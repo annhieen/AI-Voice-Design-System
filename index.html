@@ -3,176 +3,197 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Rehear design system — playful, cheeky, aspirational voice-practice brand." />
-  <title>Rehear — Design System</title>
+  <meta name="description" content="Ditto — hear a clearer version of your own voice, then shadow it until it feels like yours." />
+  <title>Ditto — Your voice. But better.</title>
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./ditto.css" />
 </head>
-<body>
-  <main class="ds-shell">
-    <header class="ds-section">
-      <div class="cluster" style="justify-content:space-between;align-items:flex-start;">
-        <div>
-          <div class="brand-mark">rehear</div>
-          <p class="muted">Design system v1.0 · Playful · Cheeky · Aspirational</p>
-        </div>
-        <span class="tape">Show me, don’t correct me.</span>
-      </div>
-    </header>
+<body class="ditto-page">
+  <header class="site-nav">
+    <a class="brand-mark" href="#">ditto</a>
+    <button class="btn btn-ghost" data-open-onboarding>Try it free</button>
+  </header>
 
-    <section class="ds-section">
-      <span class="ds-kicker">01 · Brand core</span>
-      <div class="hero-demo">
-        <div class="hero-copy">
-          <h1 class="display-hero">Your voice.<br><span class="highlight-word">But better.</span></h1>
-          <p class="note">Hear it. Shadow it. Make it yours.</p>
-          <p class="ds-copy">Rehear helps language learners hear a clearer version of their own voice, then practice toward it until it feels natural.</p>
-          <div class="cluster">
-            <a class="btn btn-primary" href="#components">Try it — 30 seconds →</a>
-            <span class="chip yellow">No pressure</span>
+  <main>
+    <section class="site-section hero-section">
+      <div class="hero-copy">
+        <h1 class="display-hero">Your voice.<br><span class="highlight-word">But better.</span></h1>
+        <p class="note hero-note">Hear it. Shadow it. Make it yours.</p>
+        <p class="hero-body">Highlight anything you're reading. Ditto plays it back in a clearer version of your own voice — so you can hear where you're going before you practise your way there.</p>
+        <div class="cluster">
+          <button class="btn btn-primary btn-lg" data-open-onboarding>Try it — 30 seconds</button>
+        </div>
+        <p class="microcopy">No pressure. No pronunciation test.</p>
+      </div>
+
+      <div class="hero-demo-wrap">
+        <span class="note floating-note green-note">practice real life.</span>
+        <div class="browser hero-browser">
+          <div class="browser-bar">
+            <span class="browser-dot" style="background:#ff5f57"></span>
+            <span class="browser-dot" style="background:#febc2e"></span>
+            <span class="browser-dot" style="background:#28c840"></span>
+          </div>
+          <div class="browser-body hero-demo-stage" id="heroDemo">
+            <p class="email-line muted">...following up on our conversation from yesterday,</p>
+            <p class="email-line hero-sentence" id="heroSentence">
+              <span>I</span> <span>really</span> <span>appreciate</span> <span>you</span> <span>taking</span> <span>the</span> <span>time</span> <span>to</span> <span>meet</span> <span>with</span> <span>me</span> <span>today.</span>
+            </p>
+            <p class="note hero-annotation" id="heroSelectNote">this one →</p>
+
+            <div class="action-strip hero-toolbar" id="heroToolbar" aria-hidden="true">
+              <button class="action-chip" id="heroHear">▶ Hear</button>
+              <button class="action-chip" id="heroShadow">🎙 Shadow</button>
+              <button class="action-chip">♡ Save</button>
+            </div>
+
+            <div class="hero-playback" id="heroPlayback" aria-hidden="true">
+              <small>Your Ditto voice</small>
+              <div class="wave blue animated-wave" data-wave="20"></div>
+              <span class="note playback-note">same words. a more you.</span>
+            </div>
+
+            <p class="note your-turn-note" id="heroTurnNote">your turn →</p>
+            <p class="note again-note" id="heroAgainNote">again?</p>
+
+            <div class="demo-cursor" id="heroCursor" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20">
+                <path d="M2 1 L2 16 L6 12.3 L9 18 L11.6 16.7 L8.6 11 L14 11 Z" fill="#1F1F1B" stroke="#F7F2E8" stroke-width="1.1"></path>
+                <circle cx="3.4" cy="13.6" r="1.5" fill="#FFD43B"></circle>
+              </svg>
+              <span class="cursor-ripple"></span>
+            </div>
           </div>
         </div>
-        <div class="hero-art" aria-label="Rehear interface composition">
-          <div class="browser">
-            <div class="browser-bar">
-              <span class="browser-dot" style="background:#ff5f57"></span>
-              <span class="browser-dot" style="background:#febc2e"></span>
-              <span class="browser-dot" style="background:#28c840"></span>
-            </div>
-            <div class="browser-body stack">
-              <h3 class="mt-0">A more human internet</h3>
-              <p class="mb-0">Good ideas happen when different perspectives <span class="selection">meet.</span></p>
-              <div class="action-strip">
-                <button class="action-chip" data-toggle-active>▶ Hear</button>
-                <button class="action-chip active" data-toggle-active>🎙 Rehearse</button>
-                <button class="action-chip" data-toggle-active>♡ Save</button>
-              </div>
-            </div>
-          </div>
-          <div class="voice-compare">
-            <div class="voice-panel">
-              <small>Your voice now</small>
-              <div class="wave" data-wave="20"></div>
-            </div>
-            <div class="voice-divider"></div>
-            <div class="voice-panel">
-              <small style="color:var(--voice)">Your rehear voice</small>
-              <div class="wave blue" data-wave="20"></div>
-            </div>
-          </div>
-          <div class="sticky-note green">Practice sounds different here.</div>
-          <div class="note">Same words.<br>A more you. ↗</div>
-        </div>
       </div>
     </section>
 
-    <section class="ds-section">
-      <span class="ds-kicker">02 · Colour</span>
-      <h2 class="ds-title">Yellow leads. Everything else pops in.</h2>
-      <p class="ds-copy">Cream and ink hold the system together. Yellow is the memory colour. Blue, green, coral and pink work like practice markers — never equal-weight decoration.</p>
-      <div class="ds-grid ds-grid-4" style="margin-top:28px">
-        <div class="swatch"><div class="swatch-color" style="background:#F7F2E8"></div><div class="swatch-meta"><strong>Paper</strong><br><code>#F7F2E8</code></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#1F1F1B"></div><div class="swatch-meta"><strong>Ink</strong><br><code>#1F1F1B</code></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#FFD43B"></div><div class="swatch-meta"><strong>Butter Yellow</strong><br><code>#FFD43B</code></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#4A8DFF"></div><div class="swatch-meta"><strong>Voice Blue</strong><br><code>#4A8DFF</code></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#39C978"></div><div class="swatch-meta"><strong>Progress Green</strong><br><code>#39C978</code></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#FF675A"></div><div class="swatch-meta"><strong>Coral</strong><br><code>#FF675A</code></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#F48FB1"></div><div class="swatch-meta"><strong>Playful Pink</strong><br><code>#F48FB1</code></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#D9D1C4"></div><div class="swatch-meta"><strong>Line</strong><br><code>#D9D1C4</code></div></div>
+    <section class="site-section belief-section">
+      <div class="belief-copy">
+        <h2 class="editorial-title">Show me.<br>Don't correct me.</h2>
+        <p class="note coral-note">no red pen energy here.</p>
+        <p>Most pronunciation tools give you someone else to copy — a native speaker, a teacher, or a perfect AI voice.</p>
+        <p>Useful? Sure. Personal? Not really.</p>
+        <p>Ditto gives you a better version of your own voice to practise toward.</p>
       </div>
-    </section>
-
-    <section class="ds-section">
-      <span class="ds-kicker">03 · Typography</span>
-      <div class="ds-grid ds-grid-3">
-        <div class="paper-card">
-          <div style="font-family:var(--font-display);font-size:4.5rem;font-weight:800;line-height:.85">Aa</div>
-          <h3>Bricolage Grotesque</h3>
-          <p class="muted">Display / brand statements / strong hierarchy</p>
-        </div>
-        <div class="paper-card">
-          <div style="font-family:var(--font-body);font-size:4.5rem;font-weight:600;line-height:.85">Aa</div>
-          <h3>Instrument Sans</h3>
-          <p class="muted">Body / interface / functional copy</p>
-        </div>
-        <div class="paper-card">
-          <div style="font-family:var(--font-note);font-size:4.5rem;line-height:.85">Aa</div>
-          <h3>Kalam</h3>
-          <p class="muted">Annotations only. Never for paragraphs.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="ds-section" id="components">
-      <span class="ds-kicker">04 · Core elements</span>
-      <h2 class="ds-title">Practice traces, not cute decoration.</h2>
-      <div class="ds-grid ds-grid-2" style="margin-top:28px">
-        <div class="dash-frame blue stack">
-          <span class="tape blue">FOR RIGHT NOW</span>
-          <h3 style="font-family:var(--font-display);font-size:2.2rem;line-height:.95;margin:0">“I need to say this soon.”</h3>
-          <p class="mb-0">Quick practice, low friction, useful in the moment.</p>
-          <div class="cluster"><span class="chip yellow">Quick practice</span><span class="chip blue">Hear</span><span class="chip green">Rehearse</span></div>
-        </div>
-        <div class="dash-frame coral stack">
-          <span class="tape green">FOR THE LONG GAME</span>
-          <h3 style="font-family:var(--font-display);font-size:2.2rem;line-height:.95;margin:0">“I want to keep this one.”</h3>
-          <p class="mb-0">Save the lines that matter. Come back when it suits you.</p>
-          <div class="note">again → closer → yours</div>
-        </div>
-      </div>
-
-      <div class="ds-grid ds-grid-3" style="margin-top:28px">
-        <div class="paper-card torn stack"><span class="tape">Marker highlight</span><p class="mb-0">Use for key words, selected text, CTA moments and “better voice” cues.</p></div>
-        <div class="paper-card raw stack"><span class="note rough-underline" style="color:var(--emphasis)">rough underline</span><p class="mb-0">Use like a practice mark, never as decoration on every heading.</p></div>
-        <div class="paper-card stack"><span class="sticky-note coral">That one’s good.</span><p class="mb-0">Sticky notes are for human commentary and playful microcopy.</p></div>
-      </div>
-    </section>
-
-    <section class="ds-section">
-      <span class="ds-kicker">05 · Voice UI</span>
-      <div class="ds-grid ds-grid-2">
-        <div class="voice-compare">
+      <div class="belief-compare">
+        <div class="voice-compare large-compare">
           <div class="voice-panel"><small>Your voice now</small><div class="wave" data-wave="18"></div></div>
           <div class="voice-divider"></div>
-          <div class="voice-panel"><small style="color:var(--voice)">Your better voice</small><div class="wave blue" data-wave="18"></div></div>
+          <div class="voice-panel"><small style="color:var(--voice)">Your Ditto voice</small><div class="wave blue" data-wave="18"></div></div>
         </div>
-        <div class="paper-card stack">
-          <div class="action-strip">
-            <button class="action-chip" data-toggle-active>▶ Hear</button>
-            <button class="action-chip active" data-toggle-active>🎙 Rehearse</button>
-            <button class="action-chip" data-toggle-active>♡ Save</button>
+        <p class="compare-question">“What would I sound like if I were better?”</p>
+        <p class="note blue-note">now you don't have to imagine it.</p>
+      </div>
+    </section>
+
+    <section class="site-section usecase-section">
+      <h2 class="section-title">Quick fix or long game — you pick.</h2>
+      <p class="section-intro">Not every moment needs the same kind of practice. Sometimes you need a line now. Sometimes you want to keep it until it sounds like yours.</p>
+      <div class="usecase-grid">
+        <article class="dash-frame blue quick-card">
+          <span class="usecase-label blue-note">FOR RIGHT NOW</span>
+          <h3>“I need to say this soon.”</h3>
+          <p>Meeting in five minutes? Interview tomorrow? Highlight the line, hear your better voice, run it back, then go say it.</p>
+          <button class="btn btn-secondary" data-open-onboarding>Try a quick practice →</button>
+          <p class="note outside-note coral-note">small practice. big difference.</p>
+        </article>
+        <article class="dash-frame green long-card">
+          <span class="usecase-label green-note">FOR THE LONG GAME</span>
+          <h3>“I want to keep this one.”</h3>
+          <p>Save the lines you actually care about. Come back when it suits you, shadow them again, and hear yourself getting closer over time.</p>
+          <ul class="plain-list">
+            <li>↗ Save from anywhere</li>
+            <li>↗ Practise again when you want</li>
+            <li>↗ Hear your progress over time</li>
+          </ul>
+          <button class="btn btn-secondary" data-open-onboarding>Start my practice list →</button>
+          <p class="note outside-note green-note">a better you comes from repeats.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="site-section anywhere-section">
+      <h2 class="section-title centered">Practice where the words already are.</h2>
+      <p class="section-intro centered">No lesson to open. No script to search for. Highlight something you actually want to say, hear it in your voice, then shadow it.</p>
+      <div class="context-row">
+        <div class="context-fragment"><span>Gmail</span><p>“Thanks for taking the time to…”</p></div>
+        <div class="context-fragment"><span>LinkedIn</span><p>“I’m excited to share that…”</p></div>
+        <div class="context-fragment"><span>Notes</span><p>“Could we move this to Friday?”</p></div>
+      </div>
+      <div class="workflow-row">
+        <div><b>1</b><strong>Highlight</strong><span>Pick any text on the web.</span></div>
+        <div><b>2</b><strong>Hear</strong><span>Listen to your better voice.</span></div>
+        <div><b>3</b><strong>Shadow</strong><span>Say it back. Again if you want.</span></div>
+        <div><b>4</b><strong>Save</strong><span>Keep the lines worth coming back to.</span></div>
+      </div>
+      <div class="action-strip anywhere-toolbar">
+        <button class="action-chip active">▶ Hear</button>
+        <button class="action-chip">🎙 Shadow</button>
+        <button class="action-chip">♡ Save</button>
+      </div>
+      <p class="note coral-note centered">practice anywhere →</p>
+    </section>
+
+    <section class="onboarding-zone" id="onboardingPreview">
+      <div class="onboarding-frame">
+        <div class="onboarding-heading">
+          <h2>Ready to hear yours?</h2>
+          <p>Give Ditto one short voice sample. We'll turn it into the voice you practise with.</p>
+        </div>
+        <div class="onboarding-layout">
+          <div class="onboarding-steps">
+            <div><b>01 · Record</b><span>Talk like yourself. One short line is enough.</span></div>
+            <div><b>02 · Meet your Ditto voice</b><span>Hear a clearer version of you.</span></div>
+            <div><b>03 · Take it with you</b><span>Add Ditto to Chrome and practise anywhere.</span></div>
           </div>
-          <p class="note">Show me, don’t correct me.</p>
+
+          <div class="onboarding-demo-card" id="onboardingDemo">
+            <div class="demo-cursor onboarding-cursor" id="onboardingCursor" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20">
+                <path d="M2 1 L2 16 L6 12.3 L9 18 L11.6 16.7 L8.6 11 L14 11 Z" fill="#1F1F1B" stroke="#F7F2E8" stroke-width="1.1"></path>
+                <circle cx="3.4" cy="13.6" r="1.5" fill="#FFD43B"></circle>
+              </svg>
+              <span class="cursor-ripple"></span>
+            </div>
+            <div id="onboardingDemoContent"></div>
+          </div>
+        </div>
+        <div class="onboarding-real-cta">
+          <button class="btn btn-secondary btn-lg" data-open-onboarding>Start recording — 30 sec</button>
+          <span class="note coral-note">yep, this is where the magic starts →</span>
         </div>
       </div>
     </section>
 
-    <section class="ds-section">
-      <span class="ds-kicker">06 · Buttons & labels</span>
-      <div class="cluster" style="margin-top:18px">
-        <button class="btn btn-primary">Try it — 30 seconds</button>
-        <button class="btn btn-secondary">Start practicing</button>
-        <button class="btn btn-ghost">Learn how it works</button>
-        <span class="chip yellow">Rehearse now</span>
-        <span class="chip blue">Voice</span>
-        <span class="chip green">Progress</span>
-        <span class="chip coral">New</span>
-      </div>
-    </section>
-
-    <section class="ds-section">
-      <span class="ds-kicker">07 · Brand behaviour</span>
-      <div class="ds-grid ds-grid-2">
-        <div class="guardrail">
-          <strong>Do</strong>
-          <p class="mb-0">Use confident type, small cheeky annotations, rough highlights, dashed frames and visible practice marks.</p>
-        </div>
-        <div class="guardrail dont">
-          <strong>Don’t</strong>
-          <p class="mb-0">Don’t turn the system into pastel scrapbook, SaaS cards everywhere, mascot-heavy gamification or random colour confetti.</p>
-        </div>
-      </div>
+    <section class="site-section final-cta">
+      <h2 class="section-title centered">Okay. Your turn.</h2>
+      <p class="section-intro centered">Give us one short line. We'll give you something worth practising toward.</p>
+      <button class="btn btn-primary btn-lg" data-open-onboarding>Hear my better voice</button>
+      <p class="note coral-note">that's really me? 👀</p>
     </section>
   </main>
+
+  <footer class="site-footer">ditto — hear it. shadow it. make it yours.</footer>
+
+  <div class="onboarding-modal" id="onboardingModal" aria-hidden="true">
+    <div class="onboarding-modal-shell">
+      <div class="modal-topbar">
+        <button class="btn btn-ghost" id="closeOnboarding">← Ditto</button>
+        <div class="progress-dots" id="progressDots"></div>
+      </div>
+      <div class="browser actual-onboarding-card">
+        <div class="browser-bar">
+          <span class="browser-dot" style="background:#ff5f57"></span>
+          <span class="browser-dot" style="background:#febc2e"></span>
+          <span class="browser-dot" style="background:#28c840"></span>
+        </div>
+        <div class="browser-body" id="actualOnboardingContent"></div>
+      </div>
+    </div>
+  </div>
+
   <script src="./script.js"></script>
+  <script src="./ditto.js"></script>
 </body>
 </html>
