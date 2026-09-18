@@ -87,3 +87,22 @@ Use yellow most often. Blue/green/coral/pink should behave like marker pens — 
 You can publish this folder directly as a static site.
 
 If it lives at the repository root, enable **Settings → Pages → Deploy from branch** and select your branch/root folder.
+
+
+## Ditto homepage prototype
+
+The current product prototype now lives alongside the design system:
+
+- `ditto.html` — Ditto homepage and real onboarding shell
+- `ditto.css` — page-specific layout, responsive rules, motion and demo styling
+- `ditto.js` — cursor-led Hero Demo A, Onboarding Demo B, and actual onboarding interaction
+
+The prototype reuses the existing `styles.css` + `tokens.css` design system instead of duplicating it.
+
+### Demo architecture
+
+- **Hero Demo A:** highlight → Hear → Ditto playback → Shadow
+- **Onboarding Demo B:** intro → read → record → reveal → Add to Chrome
+- **Actual onboarding:** interactive version of the same onboarding flow
+
+For GitHub Pages, open `ditto.html` after deployment to view the product prototype.
