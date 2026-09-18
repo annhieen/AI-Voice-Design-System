@@ -76,13 +76,14 @@
     hero.shadowStatus.style.top = resultTop + 'px';
 
     hero.reaction.style.left = toolbarLeft + 'px';
-    hero.reaction.style.top = (resultTop + 62) + 'px';
+    const reactionOffset = window.innerWidth <= 620 ? 48 : 62;
+    hero.reaction.style.top = (resultTop + reactionOffset) + 'px';
     hero.turnNote.style.left = clamp(toolbarLeft + 135, 12, stageWidth - 100) + 'px';
     hero.turnNote.style.top = (toolbarTop + 12) + 'px';
     hero.closerNote.style.left = toolbarLeft + 'px';
-    hero.closerNote.style.top = (resultTop + 56) + 'px';
+    hero.closerNote.style.top = (resultTop + (window.innerWidth <= 620 ? 44 : 56)) + 'px';
     hero.saveHint.style.left = clamp(toolbarLeft + toolbarWidth - 118, 12, stageWidth - 130) + 'px';
-    hero.saveHint.style.top = (toolbarTop + (hero.toolbar.offsetHeight || 48) + 7) + 'px';
+    hero.saveHint.style.top = (toolbarTop + (hero.toolbar.offsetHeight || 48) + (window.innerWidth <= 620 ? 5 : 7)) + 'px';
   };
 
   const moveCursor = async (cursor, x, y, ms = 520) => {
@@ -182,6 +183,7 @@
 
       hero.hear.classList.remove('pressed','active');
       hero.playback.classList.remove('visible');
+      hero.reaction.classList.remove('visible');
       await sleep(130);
 
       await moveCursorToElement(hero.cursor, hero.shadow, hero.stage, 300);
