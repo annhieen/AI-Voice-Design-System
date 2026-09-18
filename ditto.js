@@ -46,6 +46,45 @@
     };
   };
 
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+  const placeHeroFloatingUI = () => {
+    const sentenceRect = hero.sentence.getBoundingClientRect();
+    const stageRect = hero.stage.getBoundingClientRect();
+    const left = sentenceRect.left - stageRect.left;
+    const sentenceBottom = sentenceRect.bottom - stageRect.top;
+    const stageWidth = hero.stage.clientWidth;
+
+    // Selection note sits just below the selected sentence, then disappears
+    // before the contextual toolbar enters.
+    hero.selectNote.style.left = clamp(left, 12, stageWidth - 110) + 'px';
+    hero.selectNote.style.top = (sentenceBottom + 8) + 'px';
+
+    // Toolbar is visually anchored to the selection rather than the card.
+    // Keep it inside the browser frame at narrower widths.
+    const toolbarWidth = hero.toolbar.offsetWidth || 270;
+    const toolbarLeft = clamp(left, 12, stageWidth - toolbarWidth - 12);
+    const toolbarTop = sentenceBottom + 14;
+    hero.toolbar.style.left = toolbarLeft + 'px';
+    hero.toolbar.style.top = toolbarTop + 'px';
+
+    // Playback/Shadow content uses the same left axis as the popup.
+    const resultTop = toolbarTop + (hero.toolbar.offsetHeight || 48) + 16;
+    hero.playback.style.left = toolbarLeft + 'px';
+    hero.playback.style.top = resultTop + 'px';
+    hero.shadowStatus.style.left = toolbarLeft + 'px';
+    hero.shadowStatus.style.top = resultTop + 'px';
+
+    hero.reaction.style.left = toolbarLeft + 'px';
+    hero.reaction.style.top = (resultTop + 62) + 'px';
+    hero.turnNote.style.left = clamp(toolbarLeft + 135, 12, stageWidth - 100) + 'px';
+    hero.turnNote.style.top = (toolbarTop + 12) + 'px';
+    hero.closerNote.style.left = toolbarLeft + 'px';
+    hero.closerNote.style.top = (resultTop + 56) + 'px';
+    hero.saveHint.style.left = clamp(toolbarLeft + toolbarWidth - 118, 12, stageWidth - 130) + 'px';
+    hero.saveHint.style.top = (toolbarTop + (hero.toolbar.offsetHeight || 48) + 7) + 'px';
+  };
+
   const moveCursor = async (cursor, x, y, ms = 520) => {
     cursor.style.transitionDuration = ms + 'ms';
     cursor.style.transform = `translate(${Math.round(x)}px,${Math.round(y)}px)`;
@@ -90,6 +129,7 @@
     const endX = sentenceRect.right - stageRect.left - 4;
     const y = sentenceRect.top - stageRect.top + sentenceRect.height * .58;
 
+    placeHeroFloatingUI();
     setCursorMode(hero.cursor, 'ibeam');
     await moveCursor(hero.cursor, startX, y, 420);
     await sleep(80);
@@ -123,9 +163,13 @@
       await sleep(500);
 
       await dragSelectSentence();
-      await sleep(160);
+      await sleep(120);
 
+      // The helper note explains the drag only; remove it before the popup
+      // appears so copy never collides with product UI.
+      hero.selectNote.classList.remove('visible');
       hero.toolbar.classList.add('visible');
+      requestAnimationFrame(placeHeroFloatingUI);
       await sleep(240);
 
       await moveCursorToElement(hero.cursor, hero.hear, hero.stage, 300);
@@ -167,6 +211,10 @@
       await sleep(420);
     }
   };
+
+  window.addEventListener('resize', () => {
+    if (hero.stage && hero.toolbar.classList.contains('visible')) placeHeroFloatingUI();
+  });
 
   // ONBOARDING DEMO B -------------------------------------------------------
   const demoB = {
