@@ -203,3 +203,50 @@
   .your-turn-note,.closer-note,.save-hint{font-size:.82rem}
   .floating-note{right:10px;top:-30px}
 }
+
+/* FINAL hero demo spacing/alignment override */
+@media (max-width:620px){
+  .hero-demo-stage{min-height:320px!important;padding:20px!important}
+  .hero-sentence{display:block;max-width:100%;margin:0 0 12px}
+  .hero-toolbar{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    width:min(100%,330px);
+    max-width:calc(100% - 40px);
+    gap:4px;
+    padding:5px;
+  }
+  .hero-toolbar .action-chip{
+    min-width:0;
+    padding:9px 8px;
+    font-size:12px;
+    line-height:1.2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    white-space:nowrap;
+  }
+  .hero-playback{
+    width:min(100%,300px);
+    max-width:calc(100% - 40px);
+    grid-template-columns:1fr;
+    grid-template-areas:"label" "wave" "value";
+    row-gap:5px;
+  }
+  .hero-playback small{font-size:12px;line-height:1.25}
+  .hero-playback .wave{height:32px}
+  .playback-value{font-size:.82rem;line-height:1.25;white-space:normal}
+  .playback-reaction{
+    font-size:.9rem;
+    line-height:1.25;
+    white-space:normal;
+  }
+  .hero-shadow-status{
+    max-width:calc(100% - 40px);
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .shadow-label{line-height:1.25}
+  .your-turn-note,.closer-note,.save-hint{line-height:1.25}
+}
