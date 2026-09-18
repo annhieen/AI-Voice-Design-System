@@ -164,3 +164,42 @@
   .large-compare{transform:none}
   .preview-compare{grid-template-columns:1fr}
 }
+/* Hero demo mobile polish */
+@media (max-width:620px){
+  .hero-browser{transform:none}
+  .hero-demo-stage{min-height:300px!important;padding:20px!important}
+  .email-line{font-size:14px;line-height:1.55}
+  .hero-sentence{max-width:100%;margin-bottom:8px}
+  .hero-toolbar{
+    max-width:calc(100% - 40px);
+    padding:4px;
+    gap:2px;
+    border-radius:11px;
+    box-shadow:0 8px 22px rgba(31,31,27,.10)
+  }
+  .hero-toolbar .action-chip{
+    padding:7px 9px;
+    font-size:12px;
+    border-radius:8px
+  }
+  .hero-playback{
+    min-width:0;
+    width:min(290px,calc(100% - 40px));
+    max-width:calc(100% - 40px);
+    grid-template-columns:max-content 1fr;
+    grid-template-areas:"label wave" "value value";
+    column-gap:10px;
+    row-gap:2px
+  }
+  .hero-playback .wave{height:34px}
+  .playback-value{font-size:.82rem}
+  .playback-reaction{
+    font-size:.9rem;
+    max-width:calc(100% - 40px);
+    white-space:nowrap
+  }
+  .hero-shadow-status{gap:8px}
+  .shadow-label{font-size:12px}
+  .your-turn-note,.closer-note,.save-hint{font-size:.82rem}
+  .floating-note{right:10px;top:-30px}
+}
