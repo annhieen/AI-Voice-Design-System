@@ -1,0 +1,67 @@
+:root {
+  /* Brand palette */
+  --rehear-paper: #F7F2E8;
+  --rehear-paper-2: #FFFDF7;
+  --rehear-ink: #1F1F1B;
+  --rehear-muted: #666258;
+  --rehear-line: #D9D1C4;
+
+  --rehear-yellow: #FFD43B;
+  --rehear-yellow-strong: #F2C51B;
+  --rehear-blue: #4A8DFF;
+  --rehear-green: #39C978;
+  --rehear-coral: #FF675A;
+  --rehear-pink: #F48FB1;
+
+  /* Functional aliases */
+  --bg: var(--rehear-paper);
+  --surface: var(--rehear-paper-2);
+  --text: var(--rehear-ink);
+  --text-muted: var(--rehear-muted);
+  --border: var(--rehear-line);
+  --accent: var(--rehear-yellow);
+  --voice: var(--rehear-blue);
+  --progress: var(--rehear-green);
+  --emphasis: var(--rehear-coral);
+  --playful: var(--rehear-pink);
+
+  /* Typography */
+  --font-display: "Bricolage Grotesque", "Arial Black", Impact, sans-serif;
+  --font-body: "Instrument Sans", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-note: "Kalam", "Comic Sans MS", cursive;
+
+  /* Type scale */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: clamp(2rem, 4vw, 3.25rem);
+  --fs-3xl: clamp(3.25rem, 7vw, 6.5rem);
+
+  /* Spacing */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+
+  /* Shape */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* Borders & shadows */
+  --border-strong: 2px solid var(--text);
+  --shadow-hard: 4px 4px 0 var(--text);
+  --shadow-soft: 0 12px 30px rgba(31, 31, 27, 0.10);
+
+  /* Motion */
+  --ease-pop: cubic-bezier(.2,.8,.2,1);
+  --speed-fast: 140ms;
+  --speed: 220ms;
+}
