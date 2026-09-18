@@ -18,81 +18,153 @@
   const hero = {
     stage: byId('heroDemo'),
     sentence: byId('heroSentence'),
+    selection: byId('heroSelectionSweep'),
     toolbar: byId('heroToolbar'),
     hear: byId('heroHear'),
     shadow: byId('heroShadow'),
     playback: byId('heroPlayback'),
+    reaction: byId('heroReaction'),
+    shadowStatus: byId('heroShadowStatus'),
     selectNote: byId('heroSelectNote'),
     turnNote: byId('heroTurnNote'),
-    againNote: byId('heroAgainNote'),
+    closerNote: byId('heroCloserNote'),
+    saveHint: byId('heroSaveHint'),
     cursor: byId('heroCursor')
+  };
+
+  const setCursorMode = (cursor, mode) => {
+    cursor.classList.toggle('ibeam-mode', mode === 'ibeam');
+    cursor.classList.toggle('pointer-mode', mode !== 'ibeam');
+  };
+
+  const pointInStage = (element, stage, xBias = .5, yBias = .5) => {
+    const rect = element.getBoundingClientRect();
+    const stageRect = stage.getBoundingClientRect();
+    return {
+      x: rect.left - stageRect.left + rect.width * xBias,
+      y: rect.top - stageRect.top + rect.height * yBias
+    };
   };
 
   const moveCursor = async (cursor, x, y, ms = 520) => {
     cursor.style.transitionDuration = ms + 'ms';
-    cursor.style.transform = `translate(${x}px,${y}px)`;
+    cursor.style.transform = `translate(${Math.round(x)}px,${Math.round(y)}px)`;
     await sleep(ms + 20);
   };
 
+  const moveCursorToElement = async (cursor, element, stage, ms = 420, xBias = .5, yBias = .5) => {
+    const point = pointInStage(element, stage, xBias, yBias);
+    await moveCursor(cursor, point.x, point.y, ms);
+  };
+
   const clickCursor = async (cursor) => {
+    await sleep(70);
     cursor.classList.add('clicking');
-    await sleep(180);
+    await sleep(130);
     cursor.classList.remove('clicking');
-    await sleep(60);
+    await sleep(45);
   };
 
   const clearHero = () => {
-    [...hero.sentence.querySelectorAll('span')].forEach((span) => span.classList.remove('selected'));
+    hero.selection.style.transition = 'none';
+    hero.selection.style.width = '0px';
+    hero.selection.classList.remove('dragging');
     hero.toolbar.classList.remove('visible');
     hero.playback.classList.remove('visible');
+    hero.reaction.classList.remove('visible');
+    hero.shadowStatus.classList.remove('visible');
     hero.selectNote.classList.remove('visible');
     hero.turnNote.classList.remove('visible');
-    hero.againNote.classList.remove('visible');
-    hero.hear.classList.remove('pressed');
-    hero.shadow.classList.remove('pressed');
+    hero.closerNote.classList.remove('visible');
+    hero.saveHint.classList.remove('visible');
+    hero.hear.classList.remove('pressed','active');
+    hero.shadow.classList.remove('pressed','active');
     hero.cursor.classList.remove('clicking');
+    setCursorMode(hero.cursor, 'pointer');
+  };
+
+  const dragSelectSentence = async () => {
+    const sentenceRect = hero.sentence.getBoundingClientRect();
+    const stageRect = hero.stage.getBoundingClientRect();
+    const startX = sentenceRect.left - stageRect.left + 2;
+    const endX = sentenceRect.right - stageRect.left - 4;
+    const y = sentenceRect.top - stageRect.top + sentenceRect.height * .58;
+
+    setCursorMode(hero.cursor, 'ibeam');
+    await moveCursor(hero.cursor, startX, y, 420);
+    await sleep(80);
+
+    hero.selectNote.classList.add('visible');
+    hero.selection.style.transition = 'width 720ms linear';
+    hero.selection.classList.add('dragging');
+    requestAnimationFrame(() => {
+      hero.selection.style.width = Math.max(0, sentenceRect.width) + 'px';
+    });
+    await moveCursor(hero.cursor, endX, y, 720);
+    await sleep(90);
+    setCursorMode(hero.cursor, 'pointer');
   };
 
   const heroLoop = async () => {
-    if (!hero.stage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const words = [...hero.sentence.querySelectorAll('span')];
+    if (!hero.stage) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      clearHero();
+      hero.selection.style.width = hero.sentence.getBoundingClientRect().width + 'px';
+      hero.toolbar.classList.add('visible');
+      hero.hear.classList.add('active');
+      hero.playback.classList.add('visible');
+      hero.turnNote.classList.add('visible');
+      return;
+    }
 
     while (document.body.contains(hero.stage)) {
       clearHero();
-      await moveCursor(hero.cursor, 340, 34, 0);
-      await sleep(520);
+      await moveCursor(hero.cursor, hero.stage.clientWidth - 36, 28, 0);
+      await sleep(500);
 
-      await moveCursor(hero.cursor, 58, 78, 520);
-      hero.selectNote.classList.add('visible');
+      await dragSelectSentence();
+      await sleep(160);
 
-      for (let i = 0; i < words.length; i += 1) {
-        words[i].classList.add('selected');
-        const progressX = 58 + i * 23;
-        hero.cursor.style.transform = `translate(${Math.min(progressX, 335)}px,78px)`;
-        await sleep(55);
-      }
-
-      await sleep(170);
       hero.toolbar.classList.add('visible');
-      await sleep(260);
+      await sleep(240);
 
-      await moveCursor(hero.cursor, 82, 166, 420);
+      await moveCursorToElement(hero.cursor, hero.hear, hero.stage, 300);
       await clickCursor(hero.cursor);
-      hero.hear.classList.add('pressed');
+      hero.hear.classList.add('pressed','active');
       hero.playback.classList.add('visible');
-      await sleep(1500);
-
-      hero.hear.classList.remove('pressed');
-      await moveCursor(hero.cursor, 170, 166, 380);
-      await clickCursor(hero.cursor);
-      hero.shadow.classList.add('pressed');
-      hero.turnNote.classList.add('visible');
+      await sleep(520);
+      hero.reaction.classList.add('visible');
       await sleep(900);
 
-      hero.againNote.classList.add('visible');
-      await sleep(650);
-      await moveCursor(hero.cursor, 340, 34, 360);
+      hero.hear.classList.remove('pressed','active');
+      hero.playback.classList.remove('visible');
+      await sleep(130);
+
+      await moveCursorToElement(hero.cursor, hero.shadow, hero.stage, 300);
+      await clickCursor(hero.cursor);
+      hero.shadow.classList.add('pressed','active');
+      hero.shadowStatus.classList.add('visible');
+      hero.turnNote.classList.add('visible');
+      await sleep(720);
+      hero.closerNote.classList.add('visible');
       await sleep(350);
+
+      hero.shadow.classList.remove('pressed','active');
+      hero.shadowStatus.classList.remove('visible');
+      hero.turnNote.classList.remove('visible');
+      hero.closerNote.classList.remove('visible');
+      hero.reaction.classList.remove('visible');
+      hero.saveHint.classList.add('visible');
+      await sleep(520);
+
+      await moveCursor(hero.cursor, hero.stage.clientWidth - 30, 28, 360);
+      hero.toolbar.classList.remove('visible');
+      hero.saveHint.classList.remove('visible');
+      await sleep(180);
+      hero.selection.style.transition = 'width 300ms ease';
+      hero.selection.style.width = '0px';
+      hero.selectNote.classList.remove('visible');
+      await sleep(420);
     }
   };
 
